@@ -11,8 +11,8 @@
 		<link rel="stylesheet" href="./reveal.js/dist/theme/sky.css">
 
 		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="/reveal.js/plugin/highlight/monokai.css">
-		<script src="plugin/highlight/highlight.js"></script>
+		<link rel="stylesheet" href="./reveal.js/plugin/highlight/monokai.css">
+		<script src="./reveal.js/plugin/highlight/highlight.js"></script>
 		<script>
 			Reveal.initialize({
 				plugins: [ RevealHighlight ]
@@ -42,9 +42,96 @@ kubectl get RESOURCE                  # Display one or many resources
 kubectl describe RESOURCE             # Show details of a specific resource
 kubectl edit RESOURCE                 # Edit the resource by using editor
 kubectl apply -f resource-file.yaml   # Create/update resource from file
-
 						</code></pre>
 					</div>
+				</section>
+				<section>
+					<h2>Pod</h2>
+					<ul>
+						<li>A Pod  is a group of one or more containers (docker) with shared storage and network resources.<br>
+						<li>Pods are the smallest deployable units of computing in Kubernetes.
+						<li>Usually each μS run in its own POD(s)</li>
+					</ul>
+					<img src="./assets/pods.png" width="400" height="200">
+				</section>
+
+				<section>
+					<h2>let's try</h2>
+					<div>pod.yaml</div>
+						<pre><code data-trim data-noescape>
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lc-web
+spec:
+  containers:
+  - name: lc-web
+    image: eylonmalin/lets-chat-web:v1
+    ports:
+    - containerPort: 80
+ 						 </code></pre>
+						your turn
+						<pre><code data-trim data-noescape>
+> kubectl apply -f task-1/pod.yaml # create the pod
+> kubectl get po # show all pods status
+> kubectl get po lc-web # show pod lc-web status
+> kubectl exec lc-web -- curl localhost:80 # exec command - browse html file
+						</code></pre>
+				</section>
+
+				<section>
+					<h2>Deployment</h2>
+					<ul>
+						<li>Deployment describe desired state for pods<br>
+						<li>Deployment make sure your pods are running within the desired replica.
+						<li>Usually each deployment run cluster of same μS</li>
+					</ul>
+					<img class="r-stretch" src="./assets/deployment.png">
+				</section>
+
+				<section>
+					<h2>deployment.yaml</h2>
+						<pre style="height:700px"><code data-trim data-noescape>
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lc-web # The name of your deployment
+  labels:
+    app: lc-web  # The label of your deployment
+spec:
+  replicas: 3 # Number of replicated pods
+  selector:
+    matchLabels:
+      app: lc-web # defines how the Deployment finds which Pods to manage. Should match labels defined in the Pod template
+  template:
+    metadata:
+      labels:
+        app: lc-web # The label of the pod to match selectors
+    spec:
+      containers:
+      - name: lc-web # The container name
+        image: eylonmalin/lets-chat-web:v1 # The DockerHub image
+        ports:
+        - containerPort: 80 # Open pod port 80 for the container
+        env: # [OPTIONAL] add environments values
+        - name: CODE_ENABLED
+          value: "false"
+						</code></pre>
+				</section>
+
+				<section>
+					<h2>Create deployment</h2>
+					first delete pod and watch out what happen to the pod
+					<pre><code data-trim data-noescape>
+> kubectl delete po lc-web # delete the pod
+> kubectl get po # show pods status
+						</code></pre>
+				the create a deployment watch out what happen to the pod
+					<pre><code data-trim data-noescape>
+> kubectl apply -f task-2/deployment.yaml # create the deployment
+> kubectl get deploy lc-web # show the deployment
+> kubectl get po # show pods status
+						</code></pre>
 				</section>
 			</div>
 		</div>
@@ -59,7 +146,9 @@ kubectl apply -f resource-file.yaml   # Create/update resource from file
 			// - https://revealjs.com/config/
 			Reveal.initialize({
 				hash: true,
-
+				width: 1200,
+  				height: 900,
+				margin: 0.04,
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 			});

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lc-web
+spec:
+  containers:
+  - name: lc-web
+    image: eylonmalin/lets-chat-web:v1
+    ports:
+    - containerPort: 80
