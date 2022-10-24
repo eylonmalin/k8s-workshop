@@ -18,6 +18,11 @@
 				plugins: [ RevealHighlight ]
 			});
 		</script>
+		<style>
+    		.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 {
+                  text-transform: none;
+		  }
+		</style>
 	</head>
 	<body>
 		<div class="reveal">
@@ -211,6 +216,7 @@ spec:
 > kubectl logs -f lc-web-123 # print logs of the pod and follow
 						</code></pre>
 				</section>
+
 				<section>
 					<h2>pod commands: Exec</h2>
 					exec - run command
@@ -221,6 +227,24 @@ spec:
 					<br>
 					Interactive - provide shell in the pod (like ssh)
 					<pre><code>> kubectl exec lc-web-123 -it -- sh # provide shell in the pod (like ssh)</code></pre>
+				</section>
+
+				<section>
+					<h1>Service</h1>
+				</section>
+				<section>
+					<h2>service</h2>
+					<img class="r-stretch" src="./assets/service.png">
+				</section>
+
+				<section>
+					<h2>What is a service in k8s</h2>
+					<ul>
+						<li>An abstract way to expose an application running on a set of Pods as a network service.
+						<li>The service expose one DNS name + port to connect to these pods/deployment.
+						<li>In ths way other pods/exteranl consumers don't need to know the specific ip/port of each pod.
+						<li>The service route the traffic to the actual pods, and also can can load-balance across them.
+					</ul>
 				</section>
 			</div>
 		</div>
