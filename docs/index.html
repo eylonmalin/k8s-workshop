@@ -87,6 +87,10 @@ spec:
 				</section>
 
 				<section>
+					<h1>deployment</h1>
+				</section>
+
+				<section>
 					<h2>Deployment</h2>
 					<ul>
 						<li>Deployment describe desired state for pods<br>
@@ -95,9 +99,7 @@ spec:
 					</ul>
 					<img class="r-stretch" src="./assets/deployment.png">
 				</section>
-				<section>
-					<h1>deployment</h1>
-				</section>
+
 				<section>
 					<h2>deployment.yaml</h2>
 						<pre style="height:700px"><code data-trim data-noescape>
@@ -160,8 +162,8 @@ spec:
 					<h2>Scale deployment</h2>
 					Change the amount of pods in an existing deployment
 					<pre><code>$ kubectl scale --replicas=COUNT (-f FILENAME | TYPE NAME)</code></pre>
-					<br>It useful for debugging:<br>scale down to 1 pod and then scale up to more pods
-					<br><br>Scale Down
+					<br><div style="text-align: left;">useful for debugging, scale down to 1 pod and then scale up to more pods</div>
+					<br>Scale Down
 					<pre><code data-trim data-noescape>
 > kubectl scale deployment lc-web --replicas=1 # scale down to 1 pods
 > kubectl get po
@@ -171,6 +173,10 @@ spec:
 > kubectl scale deployment lc-web --replicas=3 # scale up to original count
 > kubectl get po
 					</code></pre>
+				</section>
+
+				<section>
+					<h1>Interaction with pods</h1>
 				</section>
 
 				<section>
@@ -190,9 +196,6 @@ spec:
 					</code></pre>
 				</section>
 
-				<section>
-					<h1>Interaction with pods</h1>
-				</section>
 				<section>
 					<h2>pod commands: Logs</h2>
 					logs - print logs
