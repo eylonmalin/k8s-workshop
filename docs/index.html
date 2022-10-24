@@ -157,6 +157,40 @@ spec:
 				</section>
 
 				<section>
+					<h2>Scale deployment</h2>
+					Change the amount of pods in an existing deployment
+					<pre><code>$ kubectl scale --replicas=COUNT (-f FILENAME | TYPE NAME)</code></pre>
+					<br>It useful for debugging:<br>scale down to 1 pod and then scale up to more pods
+					<br><br>Scale Down
+					<pre><code data-trim data-noescape>
+> kubectl scale deployment lc-web --replicas=1 # scale down to 1 pods
+> kubectl get po
+					</code></pre>
+					do your debugging job, and then ...<br><br>Scale Up
+					<pre><code data-trim data-noescape>
+> kubectl scale deployment lc-web --replicas=3 # scale up to original count
+> kubectl get po
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Restart a pod</h2>
+					<br>Restart pod by delete it
+					<pre><code data-trim data-noescape>
+> kubectl get po
+> kubectl delete po lc-web-123 # delete the pod. k8s will start new one
+> kubectl get po
+					</code></pre>
+					<br>Restart pod by scale to 0 and then to 1
+					<pre><code data-trim data-noescape>
+> kubectl get po
+> kubectl scale deployment lc-web --replicas=0 # scale down all pods
+> kubectl get po
+> kubectl scale deployment lc-web --replicas=1 # scale up to 1 pod
+					</code></pre>
+				</section>
+
+				<section>
 					<h1>Interaction with pods</h1>
 				</section>
 				<section>
