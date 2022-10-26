@@ -20,5 +20,8 @@ spec:
         ports:
         - containerPort: 80 # Open pod port 80 for the container
         env: # [OPTIONAL] add environments values 
-        - name: CODE_ENABLED
-          value: "true"
+          - name: CODE_ENABLED
+            valueFrom:
+              configMapKeyRef:
+                name: lc-web-config
+                key: code.enabled

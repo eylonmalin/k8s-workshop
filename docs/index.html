@@ -131,7 +131,7 @@ spec:
         - containerPort: 80 # Open pod port 80 for the container
         env: # [OPTIONAL] add environments values
         - name: CODE_ENABLED
-          value: "false"
+          value: "true"
 						</code></pre>
 				</section>
 
@@ -249,7 +249,7 @@ spec:
 
 				<section>
 					<h2>service.yaml</h2>
-					<pre><code data-trim data-noescape>
+					<pre style="font-size: 0.6em"><code data-trim data-noescape>
 kind: Service
 apiVersion: v1
 metadata:
@@ -273,6 +273,87 @@ spec:
 > kubectl describe svc lc-web # show details about the service
 						</code></pre>
 				</section>
+
+				<section>
+					<h1>ConfigMap</h1>
+				</section>
+
+				<section>
+					<h2>ConfigMap</h2>
+					<ul>
+						<li>ConfigMap is kay-value object that pods can consume for configuration
+						<li>ConfigMaps are usually used for injecting environment variables, or as configuration files in a volume
+					</ul>
+				</section>
+
+				<section>
+					<h2>configmap.yaml</h2>
+					<pre style="font-size: 1em"><code data-trim data-noescape>
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lc-web-config
+data:
+  code.enabled: "false"
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Deployment use ConfigMap</h2>
+					<pre><code data-trim data-noescape>
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lc-web # The name of your deployment
+spec:
+  template:
+    spec:
+      containers:
+      - name: lc-web # The container name
+        image: eylonmalin/lets-chat-web:v1 # The DockerHub image
+        env:
+          - name: CODE_ENABLED
+            valueFrom:
+              configMapKeyRef:
+                name: lc-web-config
+                key: code.enabled
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>create a ConfigMap</h2>
+					<pre><code data-trim data-noescape>
+> kubectl get po  # show pods
+> kubectl exec lc-web-123 -- curl localhost # browse html - code required
+> kubectl apply -f task-4/lc-web-config.yaml # create ConfigMap
+> kubectl get cm # show all ConfigMaps
+> kubectl describe cm lc-web-config # show ConfigMap content
+> kubectl apply -f task-4/deployment.yaml # update deployment to use ConfigMap
+> kubectl get po  # show pods
+> kubectl exec lc-web-123 -- curl localhost # browse html - different result
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>edit a ConfigMap</h2>
+					<pre><code data-trim data-noescape>
+> kubectl get po  # show pods
+> kubectl exec lc-web-123 -- curl localhost # browse html - code not required
+
+#edit task-4/lc-web-config.yaml code.enabled: "true"
+
+> kubectl apply -f task-4/lc-web-config.yaml # update ConfigMap
+> kubectl describe cm lc-web-config # show ConfigMap content
+> kubectl exec lc-web-123 -- curl localhost # browse html - nothing has changed
+> kubectl apply -f task-4/deployment.yaml # update deployment
+> kubectl get po  # show pods
+> kubectl exec lc-web-123 -- curl localhost # browse html - nothing has changed
+> kubectl rollout restart deployment lc-web
+> kubectl get po  # show pods
+> kubectl exec lc-web-456 -- curl localhost #finally different result
+					</code></pre>
+				</section>
+
 			</div>
 		</div>
 
