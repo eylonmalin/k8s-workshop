@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -35,6 +35,36 @@
 				</section>
 				<section>
 					<h2>Introduction</h2>
+				</section>
+				<section>
+					<h2>Docker</h2>
+				</section>
+				<section>
+					<h3>Docker definition</h3>
+					<ul>
+						<li>Docker is a container OS-level virtualization</li>
+						<li>Container use multiple isolated user space instances</li>
+						<li>In this way we can run multiple applications on same OS, while each application can only see the container's contents and devices</li>
+						<li>Docker images become container when they run on docker engine</li>
+					</ul>
+				</section>
+				<section>
+					<img src="./assets/docker.png">
+				</section>
+				<section>
+					<h3>Dockerfile</h3>
+					<pre><code data-trim data-noescape>
+FROM node:0.12-slim
+
+USER root
+RUN mkdir -p /usr/src/app
+
+COPY docker/app/config.js /usr/src/app/app/config.js
+COPY docker/app/app.js /usr/src/app/app.js
+COPY docker/app/client.js /usr/src/app/media/js/client.js
+
+CMD ["npm", "start"]
+					</code></pre>
 				</section>
 				<section>
 					<h3>kubectl</h3>
