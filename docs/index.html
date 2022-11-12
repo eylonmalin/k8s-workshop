@@ -67,18 +67,58 @@ CMD ["npm", "start"]
 					</code></pre>
 				</section>
 				<section>
+					<h2>Kubernetes</h2>
+				</section>
+				<section>
+					<img src="./assets/microservices.png" width="1200" height="800">
+				</section>
+				<section>
+					<h3>Microservices challenges</h3>
+					<ul>
+						<li>Auto scale - add more resources to your app upon load</li>
+						<li>Load balancing - split the work between multiple containers</li>
+						<li>service discovery - find the ip address of a peer container</li>
+						<li>health monitoring</li>
+						<li>configuration</li>
+						<li>redundancy - keep working if one compute is gone </li>
+					</ul>
+				</section>
+				<section>
+					<h3>The Solution - Kubernetes</h3>
+					<img src="./assets/k8s-icon.svg" width="100" height="100">
+					<ul>
+						<li>Kubernetes (aka K8s) is an open-source container orchestration system for automating software deployment, scaling, and management.
+						<li>Google originally designed Kubernetes, but the Cloud Native Computing Foundation now maintains the project.
+						<li>Community includes Google, Red Hat, and over 3000 contributors.
+						<li>The name Kubernetes originates from Greek, meaning helmsman or pilot.
+					</ul>
+				</section>
+				<section>
+					<h3>K8s architecture</h3>
+					<img src="./assets/cluster.png">
+				</section>
+				<section>
 					<h3>kubectl</h3>
 					<div style="text-align: left;">
 						kubectl is the command-line tool for manage K8s.<br>
-						Each component in K8s called resource.<br><br>
-						Kubectl most in-use commands:<br>
+						kubectl command format:<br>
+						<pre><code>kubectl [command] [TYPE] [NAME] [flags]</code></pre>
+						<ul>
+							<li>command: Specifies the operation that you want to perform on one or more resources, for example create, get, describe, delete.</li>
+							<li>TYPE: Specifies the resource type</li>
+							<li>NAME: Specifies the name of the resource. If the name is omitted, details for all resources are displayed</li>
+							<li>flags: Specifies optional flags</li>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<h3>kubectl command examples</h3>
 						<pre style="width:175%"><code data-trim>
 kubectl get RESOURCE                  # Display one or many resources
 kubectl describe RESOURCE             # Show details of a specific resource
 kubectl edit RESOURCE                 # Edit the resource by using editor
 kubectl apply -f resource-file.yaml   # Create/update resource from file
 						</code></pre>
-					</div>
 				</section>
 				<section>
 					<h2>Pod</h2>
@@ -301,6 +341,7 @@ spec:
 > kubectl apply -f task-3/service.yaml # create the service
 > kubectl get svc lc-web # show the service
 > kubectl describe svc lc-web # show details about the service
+> kubectl exec lc-web-123 -- curl lc-web:80 # execute command and exit</code></pre>
 						</code></pre>
 				</section>
 
