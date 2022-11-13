@@ -296,7 +296,13 @@ spec:
 					<pre><code>> kubectl exec lc-web-123 -- curl localhost:80 # execute command and exit</code></pre>
 					<br>
 					Interactive - provide shell in the pod (like ssh)
-					<pre><code>> kubectl exec lc-web-123 -it -- sh # provide shell in the pod (like ssh)</code></pre>
+					<pre><code data-trim data-noescape>
+> kubectl exec lc-web-123 -it -- sh # provide shell in the pod (like ssh)
+>> curl localhost:80
+>> ls
+>> cat /var/lib/nginx/lets-chat/index.html
+>> exit # exit from pod cli
+					</code></pre>
 				</section>
 
 				<section>
@@ -343,6 +349,13 @@ spec:
 > kubectl describe svc lc-web # show details about the service
 > kubectl exec lc-web-123 -- curl lc-web:80 # execute command and exit</code></pre>
 						</code></pre>
+				</section>
+
+				<section>
+					Now you can see your application.<br>
+					Just browse to your user website.<br>
+					(e.g. https://learning.k8s-workshop.com/eylon/index.html)
+					<br><br>You can try to find the code by accessing the pod with exec
 				</section>
 
 				<section>
@@ -393,12 +406,16 @@ spec:
 
 				<section>
 					<h2>create a ConfigMap</h2>
+					Create the configmap itself
 					<pre><code data-trim data-noescape>
 > kubectl get po  # show pods
 > kubectl exec lc-web-123 -- curl localhost # browse html - code required
 > kubectl apply -f task-4/lc-web-config.yaml # create ConfigMap
 > kubectl get cm # show all ConfigMaps
 > kubectl describe cm lc-web-config # show ConfigMap content
+					</code></pre>
+					There is no affect yet. <br>We need to change the deployment to use the configmap
+					<pre><code data-trim data-noescape>
 > kubectl apply -f task-4/deployment.yaml # update deployment to use ConfigMap
 > kubectl get po  # show pods
 > kubectl exec lc-web-123 -- curl localhost # browse html - different result
