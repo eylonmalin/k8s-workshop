@@ -414,7 +414,7 @@ spec:
 > kubectl get cm # show all ConfigMaps
 > kubectl describe cm lc-web-config # show ConfigMap content
 					</code></pre>
-					There is no affect yet. <br>We need to change the deployment to use the configmap
+					There is no effect yet. <br>We need to change the deployment to use the configmap
 					<pre><code data-trim data-noescape>
 > kubectl apply -f task-4/deployment.yaml # update deployment to use ConfigMap
 > kubectl get po  # show pods
@@ -436,12 +436,48 @@ spec:
 > kubectl apply -f task-4/deployment.yaml # update deployment
 > kubectl get po  # show pods
 > kubectl exec lc-web-123 -- curl localhost # browse html - nothing has changed
-> kubectl rollout restart deployment lc-web
+> kubectl rollout restart deployment lc-web #restart all pods
 > kubectl get po  # show pods
 > kubectl exec lc-web-456 -- curl localhost #finally different result
 					</code></pre>
 				</section>
 
+				<section>
+					<h2>Final Exercise</h2>
+				</section>
+				<section>
+					<h2>Let's Chat application</h2>
+					<img src="./assets/lets-chat.png">
+				</section>
+				<section>
+					<h2>Create all Lets Chat Resources</h2>
+					Delete previous resources
+					<pre><code data-trim data-noescape>
+> kubectl delete deployment lc-web
+> kubectl delete svc lc-web
+> kubectl delete cm lc-web-config
+					</code></pre>
+					Create all resources
+					<pre><code data-trim data-noescape>
+> kubectl apply -f task-5/db-deploy.yaml
+> kubectl apply -f task-5/db-svc.yaml
+> kubectl apply -f task-5/app-cm.yaml
+> kubectl apply -f task-5/app-deploy.yaml
+> kubectl apply -f task-5/app-svc.yaml
+> kubectl apply -f task-5/web-cm.yaml
+> kubectl apply -f task-5/web-deploy.yaml
+> kubectl apply -f task-5/web-svc.yaml
+					</code></pre>
+				</section>
+				<section>
+					<img src="./assets/application-broken.png"><br>
+					Use the commands you learned today to debug the application and solve the problem.
+					<br>The problem and solution are only in the yaml files you've just applied.
+					<br>No code is need to fixed.
+				</section>
+				<section>
+					<img src="./assets/good-luck.png">
+				</section>
 			</div>
 		</div>
 

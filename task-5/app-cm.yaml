@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  db.host: "lc-dbibi"
+  db.port: "27017"

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lc-web-config
+data:
+  code.enabled: "false"
+  app.host: "lc-app"
+  app.port: "8080"
