@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: app-config
 data:
-  db.host: "lc-dbibi"
+  db.host: "mongo-db"
   db.port: "27017"
