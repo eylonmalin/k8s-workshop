@@ -152,9 +152,11 @@ CMD ["npm", "start"]
 				<section>
 					<h3>kubectl command examples</h3>
 						<pre style="width:175%"><code data-trim>
-kubectl get RESOURCE                  # Display one or many resources
-kubectl describe RESOURCE             # Show details of a specific resource
-kubectl edit RESOURCE                 # Edit the resource by using editor
+kubectl get po                  # Display list of pods
+kubectl get po lc-web       # Display one pod named lc-web
+kubectl get svc                  # Display list of services
+kubectl describe po lc-web# Show details of pod named lc-web
+kubectl edit po                 # Edit the pod by using editor
 kubectl apply -f resource-file.yaml   # Create/update resource from file
 						</code></pre>
 				</section>
@@ -208,7 +210,7 @@ spec:
 					<ul>
 						<li>Deployment describe desired state for pods<br>
 						<li>Deployment make sure your pods are running within the desired replica.
-						<li>Usually each deployment run cluster of same μS</li>
+						<li>Usually each deployment run set of pods of same microservice</li>
 					</ul>
 					<img class="r-stretch" src="./assets/deployment.png">
 				</section>
