@@ -151,12 +151,12 @@ CMD ["npm", "start"]
 				</section>
 				<section>
 					<h3>kubectl command examples</h3>
-						<pre style="width:175%"><code data-trim>
-kubectl get po                  # Display list of pods
-kubectl get po lc-web       # Display one pod named lc-web
-kubectl get svc                  # Display list of services
-kubectl describe po lc-web# Show details of pod named lc-web
-kubectl edit po                 # Edit the pod by using editor
+						<pre><code data-trim>
+kubectl get po                        # Display list of pods
+kubectl get po lc-web                 # Display one pod named lc-web
+kubectl get svc                       # Display list of services
+kubectl describe po lc-web            # Show details of pod named lc-web
+kubectl edit po                       # Edit the pod by using editor
 kubectl apply -f resource-file.yaml   # Create/update resource from file
 						</code></pre>
 				</section>
@@ -192,13 +192,16 @@ spec:
     ports:
     - containerPort: 80
  						 </code></pre>
-						your turn
-						<pre><code data-trim data-noescape>
-> kubectl apply -f task-1/pod.yaml # create the pod
-> kubectl get po # show all pods status
-> kubectl get po lc-web # show pod lc-web status
-> kubectl exec lc-web -- curl localhost:80 # exec command - browse html file
-						</code></pre>
+				</section>
+				<section>
+					<h2>Create Pod Exercise</h2>
+					Use the cheat sheet to create a pod and show it's status <aside id="linkage"><a href="https://github.com/eylonmalin/k8s-workshop" id="expander" class="enabled">https://github.com/eylonmalin/k8s-workshop</a></aside>
+					<br><ul>
+						<li>Create a pod by using apply -f task-1/pod.yaml</li>
+						<li>show all pods status</li>
+						<li>show pod lc-web status</li>
+						<li>exec command in the pod: curl localhost:80</li>
+					</ul>
 				</section>
 
 				<section>
@@ -246,19 +249,17 @@ spec:
 				</section>
 
 				<section>
-					<h2>Create Deployment</h2>
-					first, delete pod and watch out what happen to the pod
-					<pre><code data-trim data-noescape>
-> kubectl delete po lc-web # delete the pod
-> kubectl get po # show pods status
-						</code></pre>
-				<br>then,  create a deployment and watch out what happen to the pod
-					<pre><code data-trim data-noescape>
-> kubectl apply -f task-2/deployment.yaml # create the deployment
-> kubectl get deploy lc-web # show the deployment
-> kubectl get po # show pods status
-> kubectl describe deployment lc-web # show details about the deployment
-						</code></pre>
+					<h2>Create Deployment Exercise</h2>
+
+					<ul>
+						<li>delete the pod</li>
+						<li>show all pod status and watch what happen to the pod</li>
+						<li>create a deployment by applying task-2/deployment.yaml</li>
+						<li>show the deployment lc-web</li>
+						<li>show all pods status</li>
+						<li>show details about the deployment lc-web</li>
+					</ul>
+
 				</section>
 
 				<section>
