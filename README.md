@@ -11,7 +11,8 @@ kubectl delete po foo                 # Delete the pod
 
 ## Deployment
 ```bash
-kubectl get deployment          # List deployments
-kubectl get deploy bar          # Show one deployment
-kubectl describe deployment bar # Show details about deployment bar
+kubectl get deployment                    # List deployments
+kubectl get deploy bar                    # Show one deployment
+kubectl describe deployment bar           # Show details about deployment bar
+kubectl scale deployment bar --replicas=4 # Scale deployment to 4 pods
 ```

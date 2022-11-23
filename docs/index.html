@@ -263,14 +263,13 @@ spec:
 				</section>
 
 				<section>
-					<h2>Edit Deployment</h2>
-					Let's upgrade our deployment to image eylonmalin/lets-chat-web:v2
-					<br><br><h3>Exercise</h3>
+					<h2>Edit Deployment Exercise</h2>
+					Let's upgrade our deployment to image <br>eylonmalin/lets-chat-web:v2 <br><br><br>
 					<ul>
 						<li>Go to task-2/deployment.yaml and edit the image to be eylonmalin/lets-chat-web:v2</li>
-						<li>apply your changes<pre><code>kubectl apply -f task-2/deployment.yaml</code></pre></li>
-						<li>watch pods go up and down<pre><code>kubectl get po -w</code></pre></li>
-						<li>see changes<pre><code>kubectl describe deployment lc-web</code></pre></li>
+						<li>Apply the changes</li>
+						<li>Get all pods status and watch pods go up and down</li>
+						<li>Describe deployment and watch the changes</li>
 					</ul>
 				</section>
 
@@ -278,17 +277,16 @@ spec:
 					<h2>Scale Deployment</h2>
 					Change the amount of pods in an existing deployment
 					<pre><code>$ kubectl scale --replicas=COUNT (-f FILENAME | TYPE NAME)</code></pre>
-					<br>Useful for debugging<br>
-					<br>Scale Down
-					<pre><code data-trim data-noescape>
-> kubectl scale deployment lc-web --replicas=1 # scale down to 1 pods
-> kubectl get po
-					</code></pre>
-					do your debugging job, and then ...<br><br>Scale Up
-					<pre><code data-trim data-noescape>
-> kubectl scale deployment lc-web --replicas=3 # scale up to original count
-> kubectl get po
-					</code></pre>
+					<br><h3>Scale Down</h3>
+					<ul>
+						<li>Scale deployment to 1 pod</li>
+						<li>Get pods and watch what happen</li>
+					</ul>
+					<br><br><h3>Scale Up</h3>
+					<ul>
+						<li>Scale deployment to 3 pod again</li>
+						<li>Get pods and watch what happen</li>
+					</ul>
 				</section>
 
 				<section>
