@@ -19,3 +19,10 @@ kubectl get deploy bar                    # Show one deployment
 kubectl describe deployment bar           # Show details about deployment bar
 kubectl scale deployment bar --replicas=4 # Scale deployment to 4 pods
 ```
+
+## Service
+```bash
+kubectl get svc                # List services
+kubectl get svc bar-svc        # Show one service
+kubectl describe svc bar-svc   # Show details about a service
+```
