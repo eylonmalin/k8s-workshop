@@ -55,6 +55,7 @@
 								<li>Pod</li>
 								<li>Deployment</li>
 							</ul>
+							<li>Namespace</li>
 						</ul>
 					</div>
 					<div class="col">
@@ -287,6 +288,64 @@ spec:
 						<li>Scale deployment to 3 pod again</li>
 						<li>Get pods and watch what happen</li>
 					</ul>
+				</section>
+
+				<section>
+					<h1>Namespace</h1>
+				</section>
+
+				<section>
+					<h2>What is Namespace ?</h2>
+					<ul>
+						<li>Namespaces are a way to organize clusters into virtual sub-clusters</li>
+						<li>Namespaces can be helpful when different teams or projects share a Kubernetes cluster</li>
+						<li>Each namespace is logically seperated from other namespace, so each user/team fill he lives alone in the cluster</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Using namespace</h2>
+					<ul>
+						<li>list all namespace</li>
+						<li>list pods of namespace demo</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Kubectl configuration file</h2>
+					<pre><code data-trim data-noescape>
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTi...
+    server: https://127.0.0.1:52941
+  name: prod
+contexts:
+- context:
+    cluster: prod
+    namespace: foo
+    user: eylon
+  name: prod-foo
+current-context: local-prod
+kind: Config
+preferences: {}
+users:
+- name: eylon
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiB...
+    client-key-data: LS0tLS1CRUdJTiBS...
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Context Commands</h2>
+					<pre style="width:1400px"><code data-trim data-noescape>
+kubectl config view                           # Show kubeconfig settings
+KUBECONFIG=~/.kube/config:~/.kube/kubconfig2  # Set variable where to find the kubectl config files
+kubectl config get-contexts                   # Display list of contexts
+kubectl config current-context                # Display the current-context
+kubectl config use-context my-cluster-name    # Set the default context to my-cluster-name
+					</code></pre>
 				</section>
 
 				<section>

@@ -1,5 +1,7 @@
 # Kubernetes cheat sheet
 
+Formal k8s cheat sheet: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
 ## Apply changes to any resource
 ```bash
 kubectl apply -f resource-file.yaml   # Create/update resource from file
@@ -25,6 +27,22 @@ kubectl get deployment                    # List deployments
 kubectl get deploy bar                    # Show one deployment
 kubectl describe deployment bar           # Show details about deployment bar
 kubectl scale deployment bar --replicas=4 # Scale deployment to 4 pods
+```
+
+## Namespace
+```bash
+kubectl get ns                                 #List all namespaces
+kubectl -n baz get po                      # List pods of namespace baz
+kubectl -n baz apply -f resource-file.yaml # Create/update resource from file in namespace baz
+```
+
+## Context
+```bash
+kubectl config view                           # Show kubeconfig settings
+KUBECONFIG=~/.kube/config:~/.kube/kubconfig2  # Set variable where to find the kubectl config files
+kubectl config get-contexts                   # Display list of contexts
+kubectl config current-context                # Display the current-context
+kubectl config use-context my-cluster-name    # Set the default context to my-cluster-name
 ```
 
 ## Service
