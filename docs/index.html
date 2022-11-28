@@ -440,41 +440,39 @@ spec:
 				</section>
 
 				<section>
-					<h2>create a ConfigMap</h2>
+					<h2>Create a ConfigMap</h2>
 					Create the configmap itself
-					<pre><code data-trim data-noescape>
-> kubectl get po  # show pods
-> kubectl exec lc-web-123 -- curl localhost # browse html - code required
-> kubectl apply -f task-4/lc-web-config.yaml # create ConfigMap
-> kubectl get cm # show all ConfigMaps
-> kubectl describe cm lc-web-config # show ConfigMap content
-					</code></pre>
-					There is no effect yet. <br>We need to change the deployment to use the configmap
-					<pre><code data-trim data-noescape>
-> kubectl apply -f task-4/deployment.yaml # update deployment to use ConfigMap
-> kubectl get po  # show pods
-> kubectl exec lc-web-123 -- curl localhost # browse html - different result
-					</code></pre>
+					<ul>
+						<li>Exec command in pod: curl localhost. The html contains code required</li>
+						<li>Create the config map by applying task-4/lc-web-config.yaml</li>
+						<li>Get configmap</li>
+						<li>Describe configmap</li>
+						<li>Exec command in pod again: curl localhost. Nothing has been changed. Why ?</li>
+					</ul>
 				</section>
 
 				<section>
-					<h2>edit a ConfigMap</h2>
-					<pre><code data-trim data-noescape>
-> kubectl get po  # show pods
-> kubectl exec lc-web-123 -- curl localhost # browse html - code not required
+					<h2>Change deployment to consume the ConfigMap</h2>
+					There is no effect yet. <br>We need to change the deployment to use the configmap
+					<br><br><ul>
+						<li>Change the deployment to consume the ConfigMap by applying task-4/deployment.yaml</li>
+						<li>Exec command in new pod: curl localhost. The html is different now</li>
+					</ul>
+				</section>
 
-#edit task-4/lc-web-config.yaml code.enabled: "true"
+				<section>
+					<h2>Edit a ConfigMap</h2>
 
-> kubectl apply -f task-4/lc-web-config.yaml # update ConfigMap
-> kubectl describe cm lc-web-config # show ConfigMap content
-> kubectl exec lc-web-123 -- curl localhost # browse html - nothing has changed
-> kubectl apply -f task-4/deployment.yaml # update deployment
-> kubectl get po  # show pods
-> kubectl exec lc-web-123 -- curl localhost # browse html - nothing has changed
-> kubectl rollout restart deployment lc-web #restart all pods
-> kubectl get po  # show pods
-> kubectl exec lc-web-456 -- curl localhost #finally different result
-					</code></pre>
+					<ul>
+						<li>Edit task-4/lc-web-config.yaml code.enabled: "true"</li>
+						<li>Apply changes</li>
+
+						<li>Describe the ConfigMap</li>
+						<li>Exec command in pod: curl localhost. The html is still the same 😏</li>
+						<li>Let's try to update the deployment by applying task-4/deployment.yaml. Did it help ? </li>
+						<li>Now let's try to restart the pods : kubectl rollout restart deployment lc-web</li>
+						<li>Try curl now 😀</li>
+					</ul>
 				</section>
 
 				<section>
