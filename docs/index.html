@@ -170,6 +170,7 @@ kubectl apply -f resource-file.yaml   # Create/update resource from file
 					</ul>
 					<img src="./assets/pods.png" width="400" height="200">
 				</section>
+				
 				<section>
 					<h2>kubectl apply</h2>
 					apply - create/change K8s resource (declarative way)
@@ -383,6 +384,23 @@ kubectl config use-context my-cluster-name    # Set the default context to my-cl
 				</section>
 
 				<section>
+					<h2>Port-forwarding to a Pod</h2>
+					<p>
+						<code>kubectl port-forward</code> lets you access a pod's port from your local machine, even if the pod is not exposed via a service.<br>
+						Useful for debugging or accessing internal applications.
+					</p>
+					<pre><code data-trim>
+	kubectl port-forward pod/pod-name local-port:pod-port
+	# Example:
+	kubectl port-forward pod/lc-web 8080:80
+	# Now http://localhost:8080 forwards to port 80 in the lc-web pod
+					</code></pre>
+					<p>use curl http://localhost:8080 to call to the pod html </p>
+
+				</section>
+				</section>
+
+				<section>
 					<h2>Pod Interaction: Exec</h2>
 					exec - run command
 					<pre><code>kubectl exec (POD | TYPE/NAME) [-c CONTAINER] [flags] -- COMMAND [args...]</code></pre>
@@ -399,6 +417,7 @@ kubectl config use-context my-cluster-name    # Set the default context to my-cl
 >> exit # exit from pod cli
 					</code></pre>
 				</section>
+
 
 				<section>
 					<h1>Service</h1>
@@ -444,11 +463,25 @@ spec:
 						<li>Use the service by exec pod command: curl lc-web:80</li>
 					</ul>
 				</section>
+				
+							<section>
+				<h2>Port-forwarding to a Service</h2>
+				<p>
+					<code>kubectl port-forward</code> can also forward traffic to a Kubernetes service.<br>
+					This allows you to access the service from your local machine, useful for testing or debugging.
+				</p>
+				<pre><code data-trim>
+kubectl port-forward service/service-name local-port:service-port
+# Example:
+kubectl port-forward service/lc-web-svc 8080:80
+# Now http://localhost:8080 forwards to port 80 in the lc-web service
+				</code></pre>
+			</section>
 
 				<section>
 					Now you can see your application.<br>
 					Just browse to your user website.<br>
-					(e.g. https://learning.k8s-workshop.com/eylon/index.html)
+					(e.g. http://localhost:8080/index.html)
 					<br><br>You can try to find the code by accessing the pod with exec
 				</section>
 
